@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifestyle Ideas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Lifestyle Ideas</h1>
+  <button onclick="getRandomIdea()">Get a Random Idea</button>
+  <div id="ideaBox"></div>
+
+  <script>
+    async function getRandomIdea() {
+      const response = await fetch('/api/ideas/random');
+      const data = await response.json();
+      document.getElementById('ideaBox').innerHTML = `
+        <h2>${data.category}</h2>
+        <p>${data.idea}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
